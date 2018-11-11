@@ -82,12 +82,6 @@ def test_visualize():
 
 from random import uniform
 
-def benchmark():
-    particles = [Particle(uniform(-1.0, 1.0),
-                        uniform(-1.0, 1.0),
-                        uniform(-1.0, 1.0)) for i in range(1000)]
-    simulator = ParticleSimulator(particles)
-    simulator.evolve(0.1)
 
 
 if __name__ == '__main__':
@@ -98,5 +92,6 @@ if __name__ == '__main__':
     # benchmark()
     # command(unix system): time python sports.py
 
-# timeit 命令行中 测试运行时间
+# 如果使用 timeit 命令行中 测试运行时间
 # python -m timeit -s 'fromg you_model import your_func ' 'your_func()'
+
