@@ -31,7 +31,8 @@ class ParticleSimulator:
                 p.y += d_y
                 # 不断重复 知道时间过去t
 
-
+import matplotlib
+matplotlib.use('TkAgg')
 from matplotlib import pyplot as plt
 from matplotlib import animation
 
@@ -70,11 +71,32 @@ def visualize(simulator):
 
 def test_visualize():
     # 初始化存储位置和方向对象实例
-    particles = [Particle(0.3, 0.5, 1),Particle(0.0, -0.5, -1),Particle(-0.1, -0.4, 3)]
+    particles = [Particle(0.3, 0.5, 1),
+                Particle(0.0, -0.5, -1),
+                Particle(-0.1, -0.4, 3)]
     # 生成移动规则实例 准备绘画 并传入位置对象列表
     simulator = ParticleSimulator(particles)
     # 运行动画
     visualize(simulator)
 
+
+from random import uniform
+
+def benchmark():
+    particles = [Particle(uniform(-1.0, 1.0),
+                        uniform(-1.0, 1.0),
+                        uniform(-1.0, 1.0)) for i in range(1000)]
+    simulator = ParticleSimulator(particles)
+    simulator.evolve(0.1)
+
+
 if __name__ == '__main__':
-    test_visualize()
+    # test_visualize()
+    import timeit
+    result = timeit.timeit('benchmark()',setup='from __main__ import benchmark', number=10)
+    print('总共运行时间%s:'%result)
+    # benchmark()
+    # command(unix system): time python sports.py
+
+# timeit 命令行中 测试运行时间
+# python -m timeit -s 'fromg you_model import your_func ' 'your_func()'
